@@ -1,0 +1,22 @@
+{
+  "extends": "../tsconfig.base.json",
+  "references": [{
+    "path": "../lib"
+  }],
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "../../dist/test",
+    "rootDir": ".",
+    "tsBuildInfoFile": "../../dist/test/tsconfig.tsbuildinfo",
+    "declaration": false,
+    "declarationMap": false,
+    "paths": {
+      "@lib/*": ["../lib/*"],
+      "@lib": ["../lib"]
+    },
+    "sourceRoot": "../../src/test"
+  },
+  "include": [
+    "./**/*.ts"
+  ]
+}
