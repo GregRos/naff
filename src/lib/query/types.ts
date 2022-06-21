@@ -1,4 +1,4 @@
-import { DomTagMap, NaffTagNames } from "../base/tag";
+import { DomTagMap, NaffTagNames, TagPropMap } from "../base/tag";
 import { NaffAny, NaffMany, NaffOne } from "../index";
 import { DomInput, MultiDomInput, SingleDomInput } from "../mutate/types";
 
@@ -87,7 +87,7 @@ export interface MultiQuery<Tag extends NaffTagNames> {
     $filter(selector: string): NaffMany<Tag>;
 
     // Returns only the elements in `this` matching `predicate`.
-    $filter(predicate: (tag: DomTagMap[Tag]) => boolean): NaffMany<Tag>;
+    $filter(predicate: (tag: NaffOne<Tag>) => boolean): NaffMany<Tag>;
 
     // Projects every element in `this` to zero or more other elements, removing duplicates.
     $hypermap<OutTag extends NaffTagNames>(

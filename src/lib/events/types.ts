@@ -18,24 +18,24 @@ export type NaffSubscriberMap<Tag extends NaffTagNames> = {
 
 export interface NaffEventManager<Tag extends NaffTagNames> {
     // Registers a handler using addEventListener.
-    addListener<E extends EventNames>(
+    $addListener<E extends EventNames>(
         name: E,
         handler: NaffHandler<Tag, E>
     ): this;
 
     // Unregisters a handler using removeEventListener.
-    dropListener(name: EventNames, handler: (...args: any[]) => any): this;
+    $dropListener(name: EventNames, handler: (...args: any[]) => any): this;
 
     // Returns a promise that resolves with the next invocation of `name`.
-    once<Name extends EventNames>(name: Name): Promise<EventMap[Name]>;
+    $once<Name extends EventNames>(name: Name): Promise<EventMap[Name]>;
 
     // Registers multiple event handlers and returns a token that removes the subscription
     // When closed.
-    on(map: NaffSubscriberMap<Tag>): NaffDisposableToken;
+    $on(map: NaffSubscriberMap<Tag>): NaffDisposableToken;
 
     // Registers one event handler and returns a token that removes the subscription
     // when closed.
-    on<Name extends EventNames>(
+    $on<Name extends EventNames>(
         event: Name,
         handler: NaffHandler<Tag, Name>
     ): NaffDisposableToken;

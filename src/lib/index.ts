@@ -3,7 +3,8 @@ import {
     NaffTagNames,
     NaffTags,
     SinglePropManager,
-    DomTagMap
+    DomTagMap,
+    NaffTagMap
 } from "./base/tag";
 import { NaffEventManager } from "./events/types";
 import { MultiStyleWriter, StyleSingleManager } from "./styles/types";
@@ -26,7 +27,7 @@ export type NaffAny<TagN extends NaffTagNames = NaffTagNames> =
 
 export type NaffOne<TagN extends NaffTagNames = NaffTagNames> = {
     readonly $name: string;
-    readonly $dom: DomTagMap[TagN];
+    readonly $dom: NaffTags[TagN];
     $style<R>(
         builder: (s: StyleSingleManager) => R
     ): R extends StyleSingleManager ? NaffOne<TagN> : R;
@@ -52,12 +53,10 @@ export type NaffOne<TagN extends NaffTagNames = NaffTagNames> = {
     $clone(): NaffOne<TagN>;
 } & SinglePropManager<TagN> &
     NaffEventManager<TagN> &
-    DomMutator<TagN> &
+    DomMutator<NaffOne<TagN>> &
     SingleQuery<TagN>;
 
 export type NaffMany<TagN extends NaffTagNames = NaffTagNames> = {
-    readonly $doms: DomTagMap[TagN][];
-
     $style<R>(
         builder: (s: MultiStyleWriter) => R
     ): R extends MultiStyleWriter ? NaffMany<TagN> : R;
@@ -79,7 +78,7 @@ export type NaffMany<TagN extends NaffTagNames = NaffTagNames> = {
     $clone(): NaffOne<TagN>;
 } & MultiPropManager<TagN> &
     NaffEventManager<TagN> &
-    DomMutator<TagN> &
+    DomMutator<NaffMany<TagN>> &
     MultiQuery<TagN>;
 
 //
@@ -170,6 +169,4 @@ export type NaffMany<TagN extends NaffTagNames = NaffTagNames> = {
 //
 // }
 
-const imaginaryThing = 0 as unknown as NaffOne<"img">;
-
-imaginaryThing.$style(b => b.animationDirection("asd"));
+const imaginaryThing = 0 as unknown as NaffOne<"input/checkbox">;

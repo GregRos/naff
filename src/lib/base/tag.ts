@@ -1,13 +1,12 @@
 import { NaffMany, NaffOne } from "../index";
 import { infer, LookupOrUnknown } from "../util";
+import { keys } from "lodash";
 
 export type DomTag = HTMLElement;
-export type DomTagMap = HTMLElementTagNameMap & {
-    "?": HTMLElement;
-};
-export type DomTagNames = keyof DomTagMap | "?";
+export type DomTagMap = HTMLElementTagNameMap;
+export type DomTagNames = keyof DomTagMap;
 export type DomInputType =
-    "button"
+    | "button"
     | "checkbox"
     | "color"
     | "date"
@@ -26,23 +25,67 @@ export type DomInputType =
     | "text"
     | "time"
     | "week";
-export type TagPropMap = {
-    [tag in DomTagNames]?: {
-        [prop in Exclude<keyof DomTagMap[tag], keyof DomTag> | string]?: prop extends keyof DomTagMap[tag] ? DomTagMap[tag][prop] : any
-    };
-} & {
-    [type in DomInputType as `input/${type}`]: Partial<HTMLInputElement>
-};
 
+export interface NaffTagMap extends HTMLElementTagNameMap {
+    "input/button": HTMLInputElement;
+    "input/checkbox": HTMLInputElement;
+    "input/color": HTMLInputElement;
+    "input/date": HTMLInputElement;
+    "input/datetime-local": HTMLInputElement;
+    "input/email": HTMLInputElement;
+    "input/file": HTMLInputElement;
+    "input/hidden": HTMLInputElement;
+    "input/image": HTMLInputElement;
+    "input/month": HTMLInputElement;
+    "input/number": HTMLInputElement;
+    "input/password": HTMLInputElement;
+    "input/radio": HTMLInputElement;
+    "input/range": HTMLInputElement;
+    "input/reset": HTMLInputElement;
+    "input/search": HTMLInputElement;
+    "input/submit": HTMLInputElement;
+    "input/tel": HTMLInputElement;
+    "input/text": HTMLInputElement;
+    "input/time": HTMLInputElement;
+    "input/url": HTMLInputElement;
+    "input/week": HTMLInputElement;
+    "?": Record<string, any>;
+}
+
+export type NaffTagNames = keyof NaffTagMap;
+
+export type NaffExclusiveProps<Tag extends NaffTagNames> = Exclude<
+    keyof NaffTagMap[Tag],
+    keyof HTMLElement
+>;
+export type TagPropMap = {
+    [tag in NaffTagNames]?: {
+        [prop in NaffExclusiveProps<tag>]?: NaffTagMap[tag][prop];
+    };
+};
+export type DomTrackKind =
+    | "subtitles"
+    | "captions"
+    | "descriptions"
+    | "chapters"
+    | "metadata"
+    | "";
 export type DomDir = "ltr" | "rtl" | "auto" | "";
 export type DomContentEditable = true | false | "inherit";
-
+export type DomAutoCapitalize =
+    | "off"
+    | "none"
+    | "on"
+    | "sentences"
+    | "words"
+    | "characters"
+    | "";
 export type DomCrossOrigin = "anonymous" | "use-credentials" | "";
 export type DomPreload = "none" | "metadata" | "auto" | "";
 export type DomButtonType = "submit" | "reset" | "button" | "menu" | "";
 export type DomAutoComplete = "on" | "off" | "";
 export type DomPriority = "high" | "low" | "auto" | "";
-export type DomSelectionDir = "forward" | "backward" | "none" | null;
+export type DomSelectionDir = "forward" | "backward" | "none";
 export type DomTableScope = "col" | "colgroup" | "row" | "rowgroup" | "";
 
 function inferMap<E>() {
@@ -58,7 +101,9 @@ export const allTagProps = inferMap<HTMLElement>()({
     nonce: "",
     tabIndex: 0,
     title: "",
-    id: ""
+    id: "",
+    autocapitalize: "" as DomAutoCapitalize,
+    autofocus: true
 });
 
 export type NaffAllTagProps = typeof allTagProps;
@@ -89,14 +134,15 @@ export const media = inferMap<HTMLMediaElement>()({
 });
 
 export const inputCommon = inferMap<HTMLTextAreaElement | HTMLInputElement>()({
-    autocapitalize: "",
     defaultValue: "",
     value: "",
     name: "",
     ...formProperties
 });
 
-export const inputNonHidden = inferMap<HTMLTextAreaElement | HTMLInputElement>()({
+export const inputNonHidden = inferMap<
+    HTMLTextAreaElement | HTMLInputElement
+>()({
     ...inputCommon,
     autofocus: true,
     required: true,
@@ -126,22 +172,24 @@ const inputFile = inferMap<HTMLInputElement>()({
     files: 666 as any
 });
 
-export const inputTextOrNumber = inferMap<HTMLTextAreaElement | HTMLInputElement>()({
+export const inputTextOrNumber = inferMap<
+    HTMLTextAreaElement | HTMLInputElement
+>()({
     ...inputNonHidden,
     readOnly: true,
     placeholder: "",
     required: true,
     selectionEnd: 0,
     selectionStart: 0,
-    selectionDirection: "forward" as DomSelectionDir,
-    tabIndex: 0
+    selectionDirection: "forward" as DomSelectionDir
 });
 
 export const inputText = inferMap<HTMLTextAreaElement | HTMLInputElement>()({
     ...inputTextOrNumber,
     selectionEnd: 0,
     selectionStart: 0,
-    selectionDirection: "forward" as DomSelectionDir
+    selectionDirection: "forward" as DomSelectionDir,
+    autocapitalize: ""
 });
 
 export const inputTextNonArea = inferMap<HTMLInputElement>()({
@@ -156,14 +204,11 @@ const inputNumber = inferMap<HTMLInputElement>()({
     step: ""
 });
 
-
-export const emptyDefs = {} as {
-    [tag in keyof TagPropMap]: TagPropMap[tag]
-};
+const emptyTags = {} as Record<keyof DomTagMap, object>;
 
 // TODO: Tags - Add property lists for all tags.
 export const naffTags = infer<TagPropMap>()({
-    ...emptyDefs,
+    ...emptyTags,
     img: {
         src: "",
         srcset: "",
@@ -174,18 +219,15 @@ export const naffTags = infer<TagPropMap>()({
         isMap: true,
         sizes: ""
     },
-
     html: {},
     "?": {} as Record<string, any>,
     a: {
-        accessKey: "",
         download: "",
         href: "",
         referrerPolicy: "" as ReferrerPolicy,
         text: "",
         target: "",
         rel: "",
-        tabIndex: 0,
         type: "",
         ping: ""
     },
@@ -194,7 +236,6 @@ export const naffTags = infer<TagPropMap>()({
         target: ""
     },
     area: {
-        accessKey: "",
         alt: "",
         coords: "",
         download: "",
@@ -204,18 +245,11 @@ export const naffTags = infer<TagPropMap>()({
         target: "",
         ping: ""
     },
-    audio: {
-        ...media
-    },
-    video: {
-        ...media
-    },
+    audio: media,
+    video: media,
     button: {
-        accessKey: "",
-        autofocus: true,
         disabled: true,
         name: "",
-        tabIndex: 0,
         type: "" as DomButtonType,
         value: "",
         ...formProperties
@@ -266,94 +300,46 @@ export const naffTags = infer<TagPropMap>()({
     iframe: {
         allow: "",
         allowFullscreen: true,
-        allowPaymentRequest: true,
-        csp: "",
-        fetchPriority: "" as DomPriority,
+        //allowPaymentRequest: true,
+        //csp: "",
+        //fetchPriority: "" as DomPriority,
         referrerPolicy: "",
         sandbox: 666 as any,
-        featurePolicy: 666 as any,
+        //featurePolicy: 666 as any,
         src: "",
         srcdoc: "",
         height: "",
         width: ""
     },
-    "input/button": {
-        ...inputNonHidden
-    },
-    "input/checkbox": {
-        ...inputOption
-    },
-    "input/color": {
-        ...inputNonHidden
-    },
-    "input/date": {
-        ...inputText
-    },
-    "input/datetime-local": {
-        ...inputNumber
-    },
-    "input/email": {
-        ...inputTextNonArea
-    },
-    "input/file": {
-        ...inputFile
-    },
-    "input/hidden": {
-        ...inputCommon
-    },
-    "input/image": {
-        ...inputImage
-    },
-    "input/month": {
-        ...inputNumber
-    },
-    "input/number": { ...inputNumber },
-    "input/password": { ...inputTextNonArea },
-    "input/radio": { ...inputOption },
-    "input/range": { ...inputNumber },
-    "input/reset": { ...inputNonHidden },
-    "input/search": { ...inputTextNonArea },
-    "input/submit": { ...inputNonHidden },
-    "input/tel": { ...inputTextNonArea },
-    "input/text": { ...inputTextNonArea },
-    "input/time": { ...inputNumber },
-    "input/url": { ...inputTextNonArea },
-    "input/week": { ...inputNumber }
 
     input: {
-        src: "",
-        autocomplete: "" as DomAutoComplete,
-        defaultValue: "",
-        dirName: "",
-        inputmode: "",
-        multiple: true,
-        name: "",
-        step: "",
-        type: "",
-        value: "",
-        valueAsDate: new Date() as Date | null,
-        valueAsNumber: 0,
-        autofocus: true,
-        hidden: true,
-        required: true,
-        checked: true,
-        defaultChecked: true,
-        indeterminate: true,
-        alt: "",
-        height: 0,
-        width: 0,
-        accept: "",
-        disabled: true,
-        size: 0,
-        max: "",
-        min: "",
-        maxLength: 0,
-        minLength: 0,
-
-        readOnly: true,
-
-        ...formProperties
+        ...inputImage,
+        ...inputFile,
+        ...inputNumber,
+        ...inputTextNonArea
     },
+    "input/button": inputNonHidden,
+    "input/checkbox": inputOption,
+    "input/color": inputNonHidden,
+    "input/date": inputText,
+    "input/datetime-local": inputNumber,
+    "input/email": inputTextNonArea,
+    "input/file": inputFile,
+    "input/hidden": inputCommon,
+    "input/image": inputImage,
+    "input/month": inputNumber,
+    "input/number": inputNumber,
+    "input/password": inputTextNonArea,
+    "input/radio": inputOption,
+    "input/range": inputNumber,
+    "input/reset": inputNonHidden,
+    "input/search": inputTextNonArea,
+    "input/submit": inputNonHidden,
+    "input/tel": inputTextNonArea,
+    "input/text": inputTextNonArea,
+    "input/time": inputNumber,
+    "input/url": inputTextNonArea,
+    "input/week": inputNumber,
     li: {
         value: 0,
         type: ""
@@ -361,9 +347,7 @@ export const naffTags = infer<TagPropMap>()({
     label: {
         htmlFor: ""
     },
-    legend: {
-        accessKey: ""
-    },
+    legend: {},
     link: {
         href: "",
         type: "",
@@ -452,8 +436,8 @@ export const naffTags = infer<TagPropMap>()({
         referrerPolicy: "" as ReferrerPolicy,
         defer: true,
         integrity: "",
-        noModule: true,
-        fetchPriority: "" as DomPriority
+        noModule: true
+        //fetchPriority: "" as DomPriority
     },
     select: {
         autofocus: true,
@@ -488,7 +472,7 @@ export const naffTags = infer<TagPropMap>()({
         headers: 666 as any
     },
     table: {
-        caption: "",
+        caption: 666 as any,
         tHead: 667 as any,
         tFoot: 667 as any,
         rows: 666 as any,
@@ -497,16 +481,34 @@ export const naffTags = infer<TagPropMap>()({
     template: {
         content: 667 as any
     },
-    textarea: {}
+    textarea: {
+        ...inputText
+    },
+    time: {
+        dateTime: ""
+    },
+    title: {
+        // same as textContent
+        // text: ""
+    },
+    track: {
+        kind: "" as DomTrackKind,
+        src: "",
+        srclang: "",
+        label: "",
+        default: true
+    },
+    ul: {}
 });
 
 export type NaffTags = {
     [key in keyof typeof naffTags]: typeof naffTags[key] & NaffAllTagProps;
 };
-export type NaffTagNames = keyof NaffTags;
 
-export type PropNames<TagName extends NaffTagNames> = Extract<keyof (NaffTags[TagName] & NaffAllTagProps),
-    string>;
+export type PropNames<TagName extends NaffTagNames> = Extract<
+    keyof (NaffTags[TagName] & NaffAllTagProps),
+    string
+>;
 
 export type SinglePropManager<Tag extends NaffTagNames> = {
     [prop in PropNames<Tag>]: {
@@ -517,15 +519,7 @@ export type SinglePropManager<Tag extends NaffTagNames> = {
 
 export type MultiPropManager<Tag extends NaffTagNames> = {
     [prop in PropNames<Tag>]: {
-        (x: NaffTags[Tag][prop]): NaffMany<Tag>;
+        (): NaffTags[Tag][prop];
+        (x: NaffTags[Tag][prop]): NaffOne<Tag>;
     };
 };
-
-const x = 0 as NaffOne<"input/checkbox">;
-
-"input/checkbox";
-:
-HTMLInputElement;
-
-
-const a: NaffOne<"input"> = null as any;
