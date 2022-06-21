@@ -28,10 +28,10 @@ export type DomInputType =
     | "week";
 export type TagPropMap = {
     [tag in DomTagNames]?: {
-        [prop in | string
-            | Exclude<keyof DomTagMap[tag],
-            keyof DomTag>]?: DomTagMap[tag][prop];
+        [prop in Exclude<keyof DomTagMap[tag], keyof DomTag> | string]?: prop extends keyof DomTagMap[tag] ? DomTagMap[tag][prop] : any
     };
+} & {
+    [type in DomInputType as `input/${type}`]: Partial<HTMLInputElement>
 };
 
 export type DomDir = "ltr" | "rtl" | "auto" | "";
@@ -88,8 +88,8 @@ export const media = inferMap<HTMLMediaElement>()({
     volume: 0
 });
 
-export const commonInput = inferMap<HTMLTextAreaElement | HTMLInputElement>()({
-    autocapitalize: true,
+export const inputCommon = inferMap<HTMLTextAreaElement | HTMLInputElement>()({
+    autocapitalize: "",
     defaultValue: "",
     value: "",
     name: "",
@@ -97,11 +97,11 @@ export const commonInput = inferMap<HTMLTextAreaElement | HTMLInputElement>()({
 });
 
 export const inputNonHidden = inferMap<HTMLTextAreaElement | HTMLInputElement>()({
-    ...commonInput,
+    ...inputCommon,
     autofocus: true,
     required: true,
     disabled: true,
-    autocomplete: true
+    autocomplete: ""
 });
 
 const inputOption = inferMap<HTMLInputElement>()({
@@ -115,8 +115,8 @@ const inputImage = inferMap<HTMLInputElement>()({
     ...inputNonHidden,
     alt: "",
     src: "",
-    height: "",
-    width: "",
+    height: 0,
+    width: 0,
     type: ""
 });
 
@@ -144,14 +144,22 @@ export const inputText = inferMap<HTMLTextAreaElement | HTMLInputElement>()({
     selectionDirection: "forward" as DomSelectionDir
 });
 
+export const inputTextNonArea = inferMap<HTMLInputElement>()({
+    ...inputText,
+    pattern: ""
+});
+
 const inputNumber = inferMap<HTMLInputElement>()({
     ...inputTextOrNumber,
-    min: 0,
-    max: 0
+    min: "",
+    max: "",
+    step: ""
 });
 
 
-export const emptyDefs = {} as Record<DomTagNames, object>;
+export const emptyDefs = {} as {
+    [tag in keyof TagPropMap]: TagPropMap[tag]
+};
 
 // TODO: Tags - Add property lists for all tags.
 export const naffTags = infer<TagPropMap>()({
@@ -269,14 +277,48 @@ export const naffTags = infer<TagPropMap>()({
         height: "",
         width: ""
     },
-    "input/button": {},
-    "input/checkbox": {},
-    "input/color": {},
-    "input/date": {},
-    "input/datetime-local": {},
-    "input/email": {},
-    "input/file": {},
-    "input/hidden": {},
+    "input/button": {
+        ...inputNonHidden
+    },
+    "input/checkbox": {
+        ...inputOption
+    },
+    "input/color": {
+        ...inputNonHidden
+    },
+    "input/date": {
+        ...inputText
+    },
+    "input/datetime-local": {
+        ...inputNumber
+    },
+    "input/email": {
+        ...inputTextNonArea
+    },
+    "input/file": {
+        ...inputFile
+    },
+    "input/hidden": {
+        ...inputCommon
+    },
+    "input/image": {
+        ...inputImage
+    },
+    "input/month": {
+        ...inputNumber
+    },
+    "input/number": { ...inputNumber },
+    "input/password": { ...inputTextNonArea },
+    "input/radio": { ...inputOption },
+    "input/range": { ...inputNumber },
+    "input/reset": { ...inputNonHidden },
+    "input/search": { ...inputTextNonArea },
+    "input/submit": { ...inputNonHidden },
+    "input/tel": { ...inputTextNonArea },
+    "input/text": { ...inputTextNonArea },
+    "input/time": { ...inputNumber },
+    "input/url": { ...inputTextNonArea },
+    "input/week": { ...inputNumber }
 
     input: {
         src: "",
