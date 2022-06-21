@@ -1,15 +1,29 @@
-import { PropNames, TagNames } from "../base/tag";
+import { NaffTagNames, NaffTags, PropNames, DomTagNames } from "../base/tag";
 
-export type AttrsFor<TagName extends TagNames> = {
-    [attr in PropNames<TagName> as Lowercase<attr>]: {
-        (): string;
-        (value: string): AttrsFor<TagName>;
-    };
-} & {
+export interface AttrWriter<Self> {
+    set(name: string, value: string | null): Self;
+}
+
+export interface AttrReader {
     has(name: string): boolean;
-    set(name: string, value: string | null): AttrsFor<TagName>;
-    drop(name: string): AttrsFor<TagName>;
+
     get(name: string): string;
-    get(): AttrsFor<TagName>;
-    // TODO: Add namespace
+
+    list(): string;
+}
+
+export type AttrMultiManager<Tag extends NaffTagNames> = {
+    [attr in PropNames<Tag> as Lowercase<attr> | string]: {
+        (value: string | null): AttrMultiManager<Tag>;
+    };
 };
+
+export type AttrSingleManager<Tag extends NaffTagNames> = {
+    [attr in PropNames<Tag> as Lowercase<attr> | string]: {
+        (): string;
+        (value: string): AttrSingleManager<Tag>;
+    };
+} & AttrWriter<AttrSingleManager<Tag>> &
+    AttrReader;
+
+export interface DataWriter<Self> {}

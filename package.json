@@ -1,7 +1,7 @@
 {
   "name": "naff",
-  "version": "0.1.0",
-  "description": "Client-side DOM swiss army knife and switchblade.",
+  "version": "0.1.0-alpha",
+  "description": "Client-side DOM scalpel.",
   "main": "dist/lib/index.js",
   "repository": "https://github.com/GregRos/naff.git",
   "scripts": {
@@ -14,8 +14,8 @@
     "lint:check": "prettier --check src/**/*.ts && eslint src/**/*.ts"
   },
   "keywords": [],
-  "author": "Reflectiz",
-  "license": "Proprietary",
+  "author": "Gregros",
+  "license": "MIT",
   "devDependencies": {
     "@gregros/eslint-config": "^0.3.0",
     "@types/jest": "^28.1.1",
@@ -39,8 +39,5 @@
   "lint-staged": {
     "*.{ts,js,mjs,mts,cjs,cts}": "eslint --cache --fix",
     "*.{ts,js,mts,mjs,cts,cjs,css,md,yml,yaml,json}": "prettier --write"
-  },
-  "": {
-    "@gregros/eslint-config": "^0.3.0"
   }
 }

@@ -1,8 +1,16 @@
-import { NaffTags, PropManager, TagMap } from "./base/tag";
-import { NaffStyleManager } from "./styles/types";
-import { AttrsFor } from "./attrs/types";
-import { NaffClassManager } from "./classes/types";
+import {
+    MultiPropManager,
+    NaffTagNames,
+    NaffTags,
+    SinglePropManager,
+    DomTagMap
+} from "./base/tag";
 import { NaffEventManager } from "./events/types";
+import { MultiStyleWriter, StyleSingleManager } from "./styles/types";
+import { AttrMultiManager, AttrSingleManager } from "./attrs/types";
+import { ClassManager, NaffClassWriter } from "./classes/types";
+import { DomInput, DomMutator } from "./mutate/types";
+import { MultiQuery, SingleQuery } from "./query/types";
 
 export type AttrIn = string;
 export type AttrOut = string | null;
@@ -12,38 +20,67 @@ export interface NaffDocument {
     find(selector: string): any;
 }
 
-export type NaffOne<N extends keyof NaffTags> = PropManager<N> & {
-    id: string;
-    readonly tag: TagMap[N];
-    //
-    // styles<Rs>(spec: {
-    //     [key in StyleNames]?: Styles[key]
-    // }): NaffOne<TagName>;
+export type NaffAny<TagN extends NaffTagNames = NaffTagNames> =
+    | NaffOne<TagN>
+    | NaffMany<TagN>;
 
-    style<R>(
-        builder: (s: NaffStyleManager) => R
-    ): R extends NaffStyleManager ? NaffOne<N> : R;
+export type NaffOne<TagN extends NaffTagNames = NaffTagNames> = {
+    readonly $name: string;
+    readonly $dom: DomTagMap[TagN];
+    $style<R>(
+        builder: (s: StyleSingleManager) => R
+    ): R extends StyleSingleManager ? NaffOne<TagN> : R;
 
-    // attrs(spec: {
-    //     [key in keyof AttrsFor<TagName>]?: string
-    // }): NaffOne<TagName>;
+    $attr<R>(
+        builder: (s: AttrSingleManager<TagN>) => R
+    ): R extends AttrSingleManager<TagN> ? NaffOne<TagN> : R;
 
-    attr<R>(
-        builder: (s: AttrsFor<N>) => R
-    ): R extends AttrsFor<N> ? NaffOne<N> : R;
+    $class<R>(
+        builder: (s: ClassManager) => R
+    ): R extends ClassManager ? NaffOne<TagN> : R;
 
-    event(builder: (s: NaffEventManager<N>) => unknown): NaffOne<N>;
-    //events(key: NaffHandlerKey, spec: NaffSubscriberMap<TagName> | null): NaffOne<TagName>;
-    //events(spec: NaffSubscriberMap<TagName>): NaffOne<TagName>;
+    $children(): NaffMany;
 
-    class<R>(
-        builder: (s: NaffClassManager) => R
-    ): R extends NaffClassManager ? NaffOne<N> : R;
+    $remove(): NaffOne<TagN>;
 
-    //classes(classes: string | string[]): NaffOne<TagName>;
+    $text(): string;
+    $text(value: string): NaffOne<TagN>;
 
-    find(selector: string): NaffOne<keyof NaffTags>[];
-};
+    $html(value: string): NaffOne<TagN>;
+    $html(): string;
+
+    $clone(): NaffOne<TagN>;
+} & SinglePropManager<TagN> &
+    NaffEventManager<TagN> &
+    DomMutator<TagN> &
+    SingleQuery<TagN>;
+
+export type NaffMany<TagN extends NaffTagNames = NaffTagNames> = {
+    readonly $doms: DomTagMap[TagN][];
+
+    $style<R>(
+        builder: (s: MultiStyleWriter) => R
+    ): R extends MultiStyleWriter ? NaffMany<TagN> : R;
+
+    $attr<R>(
+        builder: (s: AttrMultiManager<TagN>) => R
+    ): R extends AttrMultiManager<TagN> ? NaffMany<TagN> : R;
+
+    $class<R>(
+        builder: (s: NaffClassWriter) => R
+    ): R extends NaffClassWriter ? NaffMany<TagN> : R;
+
+    $take(n: number): NaffMany<NaffTagNames>;
+    $first(): NaffOne<TagN> | null;
+    $last(): NaffOne<TagN> | null;
+
+    $single(): NaffOne<TagN>;
+
+    $clone(): NaffOne<TagN>;
+} & MultiPropManager<TagN> &
+    NaffEventManager<TagN> &
+    DomMutator<TagN> &
+    MultiQuery<TagN>;
 
 //
 // import AttributeInput = PureDom.AttributeInput;
@@ -132,3 +169,7 @@ export type NaffOne<N extends keyof NaffTags> = PropManager<N> & {
 //     type MultiNode = QueryDom & MutateDom & MutateElement & AcquireElements;
 //
 // }
+
+const imaginaryThing = 0 as unknown as NaffOne<"img">;
+
+imaginaryThing.$style(b => b.animationDirection("asd"));

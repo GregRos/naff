@@ -1,9 +1,19 @@
-export type NaffClassManager = {
+export interface NaffClassWriter {
+    add(...names: string[]): this;
+
+    drop(...names: string[]): this;
+
+    flip(...names: string[]): this;
+
+    str(value: string): this;
+}
+
+export interface NaffClassReader {
     has(name: string): boolean;
+
     get(): string[];
-    add(...names: string[]): NaffClassManager;
-    drop(...names: string[]): NaffClassManager;
-    flip(...names: string[]): NaffClassManager;
-    str(value: string): NaffClassManager;
+
     str(): string;
-};
+}
+
+export interface ClassManager extends NaffClassWriter, NaffClassWriter {}
