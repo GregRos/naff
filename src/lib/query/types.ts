@@ -1,6 +1,7 @@
-import { DomTagMap, NaffTagNames, TagPropMap } from "../base/tag";
+import { NaffTagNames, TagPropMap } from "../base/tag-properties";
 import { NaffAny, NaffMany, NaffOne } from "../index";
 import { DomInput, MultiDomInput, SingleDomInput } from "../mutate/types";
+import { DomTagMap } from "../base/dom-types";
 
 export type NaffPredicate<Tag extends NaffTagNames> = (
     one: NaffOne<Tag>

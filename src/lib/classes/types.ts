@@ -1,4 +1,6 @@
-export interface NaffClassWriter {
+import { Subscope } from "../base/tag-properties";
+
+export interface NafftokenWriter {
     add(...names: string[]): this;
 
     drop(...names: string[]): this;
@@ -8,12 +10,20 @@ export interface NaffClassWriter {
     str(value: string): this;
 }
 
-export interface NaffClassReader {
+export interface NaffTokenManager {
     has(name: string): boolean;
 
     get(): string[];
 
+    str(value: string): this;
+
     str(): string;
+
+    add(...names: string[]): this;
+
+    drop(...names: string[]): this;
+
+    flip(...names: string[]): this;
 }
 
-export interface ClassManager extends NaffClassWriter, NaffClassWriter {}
+export interface TokenManager extends NafftokenWriter, NafftokenWriter {}

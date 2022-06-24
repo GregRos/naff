@@ -1,4 +1,5 @@
-import { NaffTagNames, NaffTags, PropNames, DomTagNames } from "../base/tag";
+import { NaffTagNames, NaffTags, PropNames } from "../base/tag-properties";
+import { DomTagNames } from "../base/dom-types";
 
 export interface AttrWriter<Self> {
     set(name: string, value: string | null): Self;

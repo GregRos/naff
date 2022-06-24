@@ -1,5 +1,6 @@
-import { NaffTagNames, NaffTags, PropNames, DomTagNames } from "../base/tag";
+import { NaffTagNames, NaffTags, PropNames } from "../base/tag-properties";
 import { NaffAny, NaffMany, NaffOne } from "../index";
+import { DomTagNames } from "../base/dom-types";
 
 export type SingleDomInput = Element | NaffOne;
 export type MultiDomInput = SingleDomInput | NaffMany | Element[];

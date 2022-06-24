@@ -1,6 +1,7 @@
-import { NaffTagNames, NaffTags, DomTagNames } from "../base/tag";
+import { NaffTagNames, NaffTags } from "../base/tag-properties";
 import { NaffOne } from "../index";
 import { NaffDisposableToken } from "../common/token";
+import { DomTagNames } from "../base/dom-types";
 
 export type EventMap = HTMLElementEventMap;
 export type EventNames = keyof EventMap;

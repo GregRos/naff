@@ -3,15 +3,16 @@ import {
     NaffTagNames,
     NaffTags,
     SinglePropManager,
-    DomTagMap,
     NaffTagMap
-} from "./base/tag";
+} from "./base/tag-properties";
 import { NaffEventManager } from "./events/types";
 import { MultiStyleWriter, StyleSingleManager } from "./styles/types";
 import { AttrMultiManager, AttrSingleManager } from "./attrs/types";
-import { ClassManager, NaffClassWriter } from "./classes/types";
+import { TokenManager, NafftokenWriter } from "./classes/types";
 import { DomInput, DomMutator } from "./mutate/types";
 import { MultiQuery, SingleQuery } from "./query/types";
+import { DomTagMap } from "./base/dom-types";
+import { AriaMultiManager, AriaSingleManager } from "./aria/types";
 
 export type AttrIn = string;
 export type AttrOut = string | null;
@@ -26,7 +27,8 @@ export type NaffAny<TagN extends NaffTagNames = NaffTagNames> =
     | NaffMany<TagN>;
 
 export type NaffOne<TagN extends NaffTagNames = NaffTagNames> = {
-    readonly $name: string;
+    readonly $tag: string;
+    readonly $naff: TagN;
     readonly $dom: NaffTags[TagN];
     $style<R>(
         builder: (s: StyleSingleManager) => R
@@ -37,11 +39,13 @@ export type NaffOne<TagN extends NaffTagNames = NaffTagNames> = {
     ): R extends AttrSingleManager<TagN> ? NaffOne<TagN> : R;
 
     $class<R>(
-        builder: (s: ClassManager) => R
-    ): R extends ClassManager ? NaffOne<TagN> : R;
+        builder: (s: TokenManager) => R
+    ): R extends TokenManager ? NaffOne<TagN> : R;
 
     $children(): NaffMany;
-
+    $aria<R>(
+        builder: (a: AriaSingleManager) => R
+    ): R extends AriaSingleManager ? NaffOne<TagN> : R;
     $remove(): NaffOne<TagN>;
 
     $text(): string;
@@ -50,6 +54,15 @@ export type NaffOne<TagN extends NaffTagNames = NaffTagNames> = {
     $html(value: string): NaffOne<TagN>;
     $html(): string;
 
+    readonly offsetLeft: number;
+    readonly offsetTop: number;
+    readonly offsetHeight: number;
+    readonly offsetWidth: number;
+    readonly clientTop: number;
+    readonly clientLeft: number;
+    readonly scrollLeft: number;
+    readonly scrollTop: number;
+
     $clone(): NaffOne<TagN>;
 } & SinglePropManager<TagN> &
     NaffEventManager<TagN> &
@@ -57,6 +70,7 @@ export type NaffOne<TagN extends NaffTagNames = NaffTagNames> = {
     SingleQuery<TagN>;
 
 export type NaffMany<TagN extends NaffTagNames = NaffTagNames> = {
+    readonly $naff: TagN;
     $style<R>(
         builder: (s: MultiStyleWriter) => R
     ): R extends MultiStyleWriter ? NaffMany<TagN> : R;
@@ -66,12 +80,15 @@ export type NaffMany<TagN extends NaffTagNames = NaffTagNames> = {
     ): R extends AttrMultiManager<TagN> ? NaffMany<TagN> : R;
 
     $class<R>(
-        builder: (s: NaffClassWriter) => R
-    ): R extends NaffClassWriter ? NaffMany<TagN> : R;
+        builder: (s: NafftokenWriter) => R
+    ): R extends NafftokenWriter ? NaffMany<TagN> : R;
 
     $take(n: number): NaffMany<NaffTagNames>;
     $first(): NaffOne<TagN> | null;
     $last(): NaffOne<TagN> | null;
+    $aria<R>(
+        builder: (a: AriaMultiManager) => R
+    ): R extends AriaMultiManager ? NaffMany<TagN> : R;
 
     $single(): NaffOne<TagN>;
 
