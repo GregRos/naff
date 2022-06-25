@@ -6,7 +6,7 @@
   "repository": "https://github.com/GregRos/naff.git",
   "scripts": {
     "test": "jest",
-    "build": "tsc -b src/lib/tsconfig.json",
+    "build": "tsc -b tsconfig.all.json",
     "clean": "shx rm -rf dist",
     "rebuild": "run-s clean build",
     "prepare": "husky install",
@@ -32,9 +32,11 @@
     "prettier": "^2.5.1",
     "shelljs": "^0.8.5",
     "shx": "^0.3.4",
+    "source-map-support": "^0.5.21",
     "ts-jest": "^28.0.4",
+    "ts-morph": "^15.1.0",
     "ts-node": "^10.8.1",
-    "typescript": "^4.7.3"
+    "typescript": "^4.6.4"
   },
   "lint-staged": {
     "*.{ts,js,mjs,mts,cjs,cts}": "eslint --cache --fix",

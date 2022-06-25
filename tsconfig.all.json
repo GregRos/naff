@@ -3,6 +3,8 @@
     "path": "src/lib/tsconfig.json"
   }, {
     "path": "src/test/tsconfig.json"
+  }, {
+    "path": "src/generator/tsconfig.json"
   }],
   "compilerOptions": {
     "module": "commonjs",

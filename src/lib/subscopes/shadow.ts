@@ -1,4 +1,4 @@
-import { NaffOne } from "../index";
+import { Naff } from "../naff";
 
 export interface NaffShadowManager {
     createNew(): NaffYesShadow;
@@ -21,7 +21,7 @@ export interface NaffYesShadow extends NaffShadowManager {
 
     find(selector: string): any;
 
-    root: NaffOne<"html">;
+    root: Naff<"html">;
 }
 
 export type NaffShadow = NaffNoShadow | NaffYesShadow;

@@ -1,5 +1,5 @@
-import { exportedText } from "@lib";
+import { Naff } from "@lib/naff";
 
-test("example test", () => {
-    expect(exportedText).toBe("Hello World!");
-});
+const a: Naff<"input/checkbox"> = null!;
+
+a.$on();

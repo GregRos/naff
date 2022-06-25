@@ -2,14 +2,11 @@
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "composite": true,
-    "outDir": "../../dist/lib",
+    "outDir": "../../dist/generator",
     "rootDir": ".",
-    "tsBuildInfoFile": "../../dist/lib/tsconfig.tsbuildinfo",
+    "tsBuildInfoFile": "../../dist/generator/tsconfig.tsbuildinfo",
     "noEmit": false,
-    "sourceMap": true,
-    "plugins": [
-      
-    ]
+    "sourceMap": true
   },
   "include": [
     "**/*.ts"
