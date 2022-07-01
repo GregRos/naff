@@ -42,7 +42,7 @@ export const media = tag<"audio" | "video">({
 
 type AnyInput = "input" | "textarea";
 
-const allTagProps = tag<keyof NaffTagMap>({
+export const schAllTags = tag<keyof NaffTagMap>({
     dir: rw(sourceDom.createRef("DomDir")),
     accessKey: rw(""),
     contentEditable: rw(sourceDom.createRef("DomContentEditable")),
@@ -501,7 +501,3 @@ export const schMapNaff = tagMap({
     thead: {},
     "?": {}
 });
-
-for (const [, value] of Object.entries(schMapNaff)) {
-    Object.assign(value, allTagProps);
-}

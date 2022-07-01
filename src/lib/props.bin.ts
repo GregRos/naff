@@ -1,152 +1,177 @@
 import { TokenSubscope, SelectionSubscope } from "./subscopes";
-import { DomDir, DomContentEditable, DomAutoCapitalize, DomCrossOrigin, DomPreload, DomButtonType, DomAutoComplete, DomImageLoading, DomImageDecoding, DomPriority, DomTableScope, DomTrackKind, DomTrackReadyState } from "./dom-types";
-import { Naff, NaffInterface } from "./naff";
+import { DomCrossOrigin, DomPreload, DomButtonType, DomAutoComplete, DomImageLoading, DomImageDecoding, DomPriority, DomTableScope, DomTrackKind, DomTrackReadyState, DomDir, DomContentEditable, DomAutoCapitalize } from "./dom-types";
+import { Naff, NaffBase } from "./naff";
 import { Naffs } from "./naffs";
 
 export interface NaffTagMap {
-    "a": NaffTag__a;
-    "base": NaffTag__base;
-    "area": NaffTag__area;
-    "audio": NaffTag__audio;
-    "video": NaffTag__video;
-    "button": NaffTag__button;
-    "canvas": NaffTag__canvas;
-    "data": NaffTag__data;
-    "dialog": NaffTag__dialog;
-    "embed": NaffTag__embed;
-    "fieldset": NaffTag__fieldset;
-    "form": NaffTag__form;
-    "frameset": NaffTag__frameset;
-    "hr": NaffTag__hr;
-    "html": NaffTag__html;
-    "img": NaffTag__img;
-    "iframe": NaffTag__iframe;
-    "input": NaffTag__input;
-    "input/button": NaffTag__input_button;
-    "input/checkbox": NaffTag__input_checkbox;
-    "input/color": NaffTag__input_color;
-    "input/date": NaffTag__input_date;
-    "input/datetime-local": NaffTag__input_datetime_local;
-    "input/email": NaffTag__input_email;
-    "input/file": NaffTag__input_file;
-    "input/hidden": NaffTag__input_hidden;
-    "input/image": NaffTag__input_image;
-    "input/month": NaffTag__input_month;
-    "input/number": NaffTag__input_number;
-    "input/password": NaffTag__input_password;
-    "input/radio": NaffTag__input_radio;
-    "input/range": NaffTag__input_range;
-    "input/reset": NaffTag__input_reset;
-    "input/search": NaffTag__input_search;
-    "input/submit": NaffTag__input_submit;
-    "input/tel": NaffTag__input_tel;
-    "input/text": NaffTag__input_text;
-    "input/time": NaffTag__input_time;
-    "input/url": NaffTag__input_url;
-    "input/week": NaffTag__input_week;
-    "li": NaffTag__li;
-    "label": NaffTag__label;
-    "legend": NaffTag__legend;
-    "link": NaffTag__link;
-    "map": NaffTag__map;
-    "meta": NaffTag__meta;
-    "meter": NaffTag__meter;
-    "del": NaffTag__del;
-    "ins": NaffTag__ins;
-    "ol": NaffTag__ol;
-    "object": NaffTag__object;
-    "optgroup": NaffTag__optgroup;
-    "option": NaffTag__option;
-    "output": NaffTag__output;
-    "progress": NaffTag__progress;
-    "q": NaffTag__q;
-    "blockquote": NaffTag__blockquote;
-    "script": NaffTag__script;
-    "select": NaffTag__select;
-    "source": NaffTag__source;
-    "style": NaffTag__style;
-    "td": NaffTag__td;
-    "table": NaffTag__table;
-    "template": NaffTag__template;
-    "textarea": NaffTag__textarea;
-    "time": NaffTag__time;
-    "title": NaffTag__title;
-    "track": NaffTag__track;
-    "ul": NaffTag__ul;
-    "wbr": NaffTag__wbr;
-    "var": NaffTag__var;
-    "u": NaffTag__u;
-    "tr": NaffTag__tr;
-    "th": NaffTag__th;
-    "tfoot": NaffTag__tfoot;
-    "sup": NaffTag__sup;
-    "summary": NaffTag__summary;
-    "sub": NaffTag__sub;
-    "strong": NaffTag__strong;
-    "span": NaffTag__span;
-    "small": NaffTag__small;
-    "slot": NaffTag__slot;
-    "section": NaffTag__section;
-    "samp": NaffTag__samp;
-    "ruby": NaffTag__ruby;
-    "rt": NaffTag__rt;
-    "rp": NaffTag__rp;
-    "pre": NaffTag__pre;
-    "picture": NaffTag__picture;
-    "param": NaffTag__param;
-    "p": NaffTag__p;
-    "noscript": NaffTag__noscript;
-    "nav": NaffTag__nav;
-    "menu": NaffTag__menu;
-    "marquee": NaffTag__marquee;
-    "mark": NaffTag__mark;
-    "main": NaffTag__main;
-    "kbd": NaffTag__kbd;
-    "i": NaffTag__i;
-    "hgroup": NaffTag__hgroup;
-    "header": NaffTag__header;
-    "head": NaffTag__head;
-    "h6": NaffTag__h6;
-    "h5": NaffTag__h5;
-    "h4": NaffTag__h4;
-    "h3": NaffTag__h3;
-    "h2": NaffTag__h2;
-    "h1": NaffTag__h1;
-    "frame": NaffTag__frame;
-    "footer": NaffTag__footer;
-    "font": NaffTag__font;
-    "figure": NaffTag__figure;
-    "figcaption": NaffTag__figcaption;
-    "em": NaffTag__em;
-    "dt": NaffTag__dt;
-    "dl": NaffTag__dl;
-    "div": NaffTag__div;
-    "dir": NaffTag__dir;
-    "dfn": NaffTag__dfn;
-    "details": NaffTag__details;
-    "dd": NaffTag__dd;
-    "datalist": NaffTag__datalist;
-    "tbody": NaffTag__tbody;
-    "colgroup": NaffTag__colgroup;
-    "col": NaffTag__col;
-    "code": NaffTag__code;
-    "cite": NaffTag__cite;
-    "br": NaffTag__br;
-    "body": NaffTag__body;
-    "bdo": NaffTag__bdo;
-    "bdi": NaffTag__bdi;
-    "b": NaffTag__b;
-    "aside": NaffTag__aside;
-    "article": NaffTag__article;
-    "address": NaffTag__address;
-    "abbr": NaffTag__abbr;
-    "s": NaffTag__s;
-    "caption": NaffTag__caption;
-    "thead": NaffTag__thead;
-    "?": NaffTag___;
+    "a": Naff_a;
+    "base": Naff_base;
+    "area": Naff_area;
+    "audio": Naff_audio;
+    "video": Naff_video;
+    "button": Naff_button;
+    "canvas": Naff_canvas;
+    "data": Naff_data;
+    "dialog": Naff_dialog;
+    "embed": Naff_embed;
+    "fieldset": Naff_fieldset;
+    "form": Naff_form;
+    "frameset": Naff_frameset;
+    "hr": Naff_hr;
+    "html": Naff_html;
+    "img": Naff_img;
+    "iframe": Naff_iframe;
+    "input": Naff_input;
+    "input/button": Naff_input_button;
+    "input/checkbox": Naff_input_checkbox;
+    "input/color": Naff_input_color;
+    "input/date": Naff_input_date;
+    "input/datetime-local": Naff_input_datetime_local;
+    "input/email": Naff_input_email;
+    "input/file": Naff_input_file;
+    "input/hidden": Naff_input_hidden;
+    "input/image": Naff_input_image;
+    "input/month": Naff_input_month;
+    "input/number": Naff_input_number;
+    "input/password": Naff_input_password;
+    "input/radio": Naff_input_radio;
+    "input/range": Naff_input_range;
+    "input/reset": Naff_input_reset;
+    "input/search": Naff_input_search;
+    "input/submit": Naff_input_submit;
+    "input/tel": Naff_input_tel;
+    "input/text": Naff_input_text;
+    "input/time": Naff_input_time;
+    "input/url": Naff_input_url;
+    "input/week": Naff_input_week;
+    "li": Naff_li;
+    "label": Naff_label;
+    "legend": Naff_legend;
+    "link": Naff_link;
+    "map": Naff_map;
+    "meta": Naff_meta;
+    "meter": Naff_meter;
+    "del": Naff_del;
+    "ins": Naff_ins;
+    "ol": Naff_ol;
+    "object": Naff_object;
+    "optgroup": Naff_optgroup;
+    "option": Naff_option;
+    "output": Naff_output;
+    "progress": Naff_progress;
+    "q": Naff_q;
+    "blockquote": Naff_blockquote;
+    "script": Naff_script;
+    "select": Naff_select;
+    "source": Naff_source;
+    "style": Naff_style;
+    "td": Naff_td;
+    "table": Naff_table;
+    "template": Naff_template;
+    "textarea": Naff_textarea;
+    "time": Naff_time;
+    "title": Naff_title;
+    "track": Naff_track;
+    "ul": Naff_ul;
+    "wbr": Naff_wbr;
+    "var": Naff_var;
+    "u": Naff_u;
+    "tr": Naff_tr;
+    "th": Naff_th;
+    "tfoot": Naff_tfoot;
+    "sup": Naff_sup;
+    "summary": Naff_summary;
+    "sub": Naff_sub;
+    "strong": Naff_strong;
+    "span": Naff_span;
+    "small": Naff_small;
+    "slot": Naff_slot;
+    "section": Naff_section;
+    "samp": Naff_samp;
+    "ruby": Naff_ruby;
+    "rt": Naff_rt;
+    "rp": Naff_rp;
+    "pre": Naff_pre;
+    "picture": Naff_picture;
+    "param": Naff_param;
+    "p": Naff_p;
+    "noscript": Naff_noscript;
+    "nav": Naff_nav;
+    "menu": Naff_menu;
+    "marquee": Naff_marquee;
+    "mark": Naff_mark;
+    "main": Naff_main;
+    "kbd": Naff_kbd;
+    "i": Naff_i;
+    "hgroup": Naff_hgroup;
+    "header": Naff_header;
+    "head": Naff_head;
+    "h6": Naff_h6;
+    "h5": Naff_h5;
+    "h4": Naff_h4;
+    "h3": Naff_h3;
+    "h2": Naff_h2;
+    "h1": Naff_h1;
+    "frame": Naff_frame;
+    "footer": Naff_footer;
+    "font": Naff_font;
+    "figure": Naff_figure;
+    "figcaption": Naff_figcaption;
+    "em": Naff_em;
+    "dt": Naff_dt;
+    "dl": Naff_dl;
+    "div": Naff_div;
+    "dir": Naff_dir;
+    "dfn": Naff_dfn;
+    "details": Naff_details;
+    "dd": Naff_dd;
+    "datalist": Naff_datalist;
+    "tbody": Naff_tbody;
+    "colgroup": Naff_colgroup;
+    "col": Naff_col;
+    "code": Naff_code;
+    "cite": Naff_cite;
+    "br": Naff_br;
+    "body": Naff_body;
+    "bdo": Naff_bdo;
+    "bdi": Naff_bdi;
+    "b": Naff_b;
+    "aside": Naff_aside;
+    "article": Naff_article;
+    "address": Naff_address;
+    "abbr": Naff_abbr;
+    "s": Naff_s;
+    "caption": Naff_caption;
+    "thead": Naff_thead;
+    "?": Naff__;
 }
 
-export interface NaffTag__a extends NaffInterface<"a"> {
+interface Naff__Common {
+    dir(input: DomDir): this;
+    dir(): DomDir;
+    accessKey(input: string): this;
+    accessKey(): string;
+    contentEditable(input: DomContentEditable): this;
+    contentEditable(): DomContentEditable;
+    hidden(input: boolean): this;
+    hidden(): boolean;
+    lang(input: string): this;
+    lang(): string;
+    nonce(input: string): this;
+    nonce(): string;
+    tabIndex(input: number): this;
+    tabIndex(): number;
+    title(input: string): this;
+    title(): string;
+    id(input: string): this;
+    id(): string;
+    autocapitalize(input: DomAutoCapitalize): this;
+    autocapitalize(): DomAutoCapitalize;
+    autofocus(input: boolean): this;
+    autofocus(): boolean;
+}
+
+export interface Naff_a extends NaffBase<"a">, Naff__Common {
     rel<R>(): R extends TokenSubscope ? this : R;
     href(input: string): this;
     href(): string;
@@ -162,60 +187,16 @@ export interface NaffTag__a extends NaffInterface<"a"> {
     ping(): string;
     hreflang(input: string): this;
     hreflang(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__base extends NaffInterface<"base"> {
+export interface Naff_base extends NaffBase<"base">, Naff__Common {
     href(input: string): this;
     href(): string;
     target(input: string): this;
     target(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__area extends NaffInterface<"area"> {
+export interface Naff_area extends NaffBase<"area">, Naff__Common {
     rel<R>(): R extends TokenSubscope ? this : R;
     href(input: string): this;
     href(): string;
@@ -231,31 +212,9 @@ export interface NaffTag__area extends NaffInterface<"area"> {
     ping(): string;
     alt(input: string): this;
     alt(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__audio extends NaffInterface<"audio"> {
+export interface Naff_audio extends NaffBase<"audio">, Naff__Common {
     src(input: string): this;
     src(): string;
     crossOrigin(input: DomCrossOrigin): this;
@@ -284,31 +243,9 @@ export interface NaffTag__audio extends NaffInterface<"audio"> {
     srcObject(): MediaProvider;
     volume(input: number): this;
     volume(): number;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__video extends NaffInterface<"video"> {
+export interface Naff_video extends NaffBase<"video">, Naff__Common {
     src(input: string): this;
     src(): string;
     crossOrigin(input: DomCrossOrigin): this;
@@ -337,31 +274,9 @@ export interface NaffTag__video extends NaffInterface<"video"> {
     srcObject(): MediaProvider;
     volume(input: number): this;
     volume(): number;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__button extends NaffInterface<"button"> {
+export interface Naff_button extends NaffBase<"button">, Naff__Common {
     disabled(input: boolean): this;
     disabled(): boolean;
     name(input: string): this;
@@ -371,117 +286,29 @@ export interface NaffTag__button extends NaffInterface<"button"> {
     value(input: string): this;
     value(): string;
     readonly labels: Naffs;
-    readonly form: Naff<"button"> | null;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
+    readonly form: Naff<"form"> | null;
 }
 
-export interface NaffTag__canvas extends NaffInterface<"canvas"> {
+export interface Naff_canvas extends NaffBase<"canvas">, Naff__Common {
     height(input: number): this;
     height(): number;
     width(input: number): this;
     width(): number;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__data extends NaffInterface<"data"> {
+export interface Naff_data extends NaffBase<"data">, Naff__Common {
     value(input: string): this;
     value(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__dialog extends NaffInterface<"dialog"> {
+export interface Naff_dialog extends NaffBase<"dialog">, Naff__Common {
     open(input: boolean): this;
     open(): boolean;
     returnValue(input: string): this;
     returnValue(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__embed extends NaffInterface<"embed"> {
+export interface Naff_embed extends NaffBase<"embed">, Naff__Common {
     src(input: string): this;
     src(): string;
     align(input: string): this;
@@ -492,60 +319,16 @@ export interface NaffTag__embed extends NaffInterface<"embed"> {
     type(): string;
     width(input: string): this;
     width(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__fieldset extends NaffInterface<"fieldset"> {
+export interface Naff_fieldset extends NaffBase<"fieldset">, Naff__Common {
     name(input: string): this;
     name(): string;
     disabled(input: boolean): this;
     disabled(): boolean;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__form extends NaffInterface<"form"> {
+export interface Naff_form extends NaffBase<"form">, Naff__Common {
     name(input: string): this;
     name(): string;
     target(input: string): this;
@@ -563,60 +346,16 @@ export interface NaffTag__form extends NaffInterface<"form"> {
     noValidate(input: boolean): this;
     noValidate(): boolean;
     readonly elements: Naffs;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__frameset extends NaffInterface<"frameset"> {
+export interface Naff_frameset extends NaffBase<"frameset">, Naff__Common {
     cols(input: string): this;
     cols(): string;
     rows(input: string): this;
     rows(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__hr extends NaffInterface<"hr"> {
+export interface Naff_hr extends NaffBase<"hr">, Naff__Common {
     align(input: string): this;
     align(): string;
     color(input: string): this;
@@ -627,56 +366,13 @@ export interface NaffTag__hr extends NaffInterface<"hr"> {
     size(): string;
     width(input: string): this;
     width(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__html extends NaffInterface<"html"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
+export interface Naff_html extends NaffBase<"html">, Naff__Common {
+    
 }
 
-export interface NaffTag__img extends NaffInterface<"img"> {
+export interface Naff_img extends NaffBase<"img">, Naff__Common {
     src(input: string): this;
     src(): string;
     srcset(input: string): this;
@@ -707,31 +403,9 @@ export interface NaffTag__img extends NaffInterface<"img"> {
     readonly naturalHeight: number;
     readonly naturalWidth: number;
     readonly complete: boolean;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__iframe extends NaffInterface<"iframe"> {
+export interface Naff_iframe extends NaffBase<"iframe">, Naff__Common {
     allow(input: string): this;
     allow(): string;
     allowFullscreen(input: boolean): this;
@@ -755,31 +429,9 @@ export interface NaffTag__iframe extends NaffInterface<"iframe"> {
     width(): string;
     name(input: string): this;
     name(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__input extends NaffInterface<"input"> {
+export interface Naff_input extends NaffBase<"input">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -819,29 +471,9 @@ export interface NaffTag__input extends NaffInterface<"input"> {
     step(): string;
     pattern(input: string): this;
     pattern(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__input_button extends NaffInterface<"input/button"> {
+export interface Naff_input_button extends NaffBase<"input/button">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -856,29 +488,9 @@ export interface NaffTag__input_button extends NaffInterface<"input/button"> {
     disabled(): boolean;
     autocomplete(input: string): this;
     autocomplete(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__input_checkbox extends NaffInterface<"input/checkbox"> {
+export interface Naff_input_checkbox extends NaffBase<"input/checkbox">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -899,29 +511,9 @@ export interface NaffTag__input_checkbox extends NaffInterface<"input/checkbox">
     defaultChecked(): boolean;
     indeterminate(input: boolean): this;
     indeterminate(): boolean;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__input_color extends NaffInterface<"input/color"> {
+export interface Naff_input_color extends NaffBase<"input/color">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -936,29 +528,9 @@ export interface NaffTag__input_color extends NaffInterface<"input/color"> {
     disabled(): boolean;
     autocomplete(input: string): this;
     autocomplete(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__input_date extends NaffInterface<"input/date"> {
+export interface Naff_input_date extends NaffBase<"input/date">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -980,29 +552,9 @@ export interface NaffTag__input_date extends NaffInterface<"input/date"> {
     selection<R>(): R extends SelectionSubscope ? this : R;
     pattern(input: string): this;
     pattern(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__input_datetime_local extends NaffInterface<"input/datetime-local"> {
+export interface Naff_input_datetime_local extends NaffBase<"input/datetime-local">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -1028,29 +580,9 @@ export interface NaffTag__input_datetime_local extends NaffInterface<"input/date
     max(): string;
     step(input: string): this;
     step(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__input_email extends NaffInterface<"input/email"> {
+export interface Naff_input_email extends NaffBase<"input/email">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -1072,29 +604,9 @@ export interface NaffTag__input_email extends NaffInterface<"input/email"> {
     selection<R>(): R extends SelectionSubscope ? this : R;
     pattern(input: string): this;
     pattern(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__input_file extends NaffInterface<"input/file"> {
+export interface Naff_input_file extends NaffBase<"input/file">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -1111,60 +623,18 @@ export interface NaffTag__input_file extends NaffInterface<"input/file"> {
     autocomplete(): string;
     accept(input: string): this;
     accept(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__input_hidden extends NaffInterface<"input/hidden"> {
+export interface Naff_input_hidden extends NaffBase<"input/hidden">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
     value(): string;
     name(input: string): this;
     name(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__input_image extends NaffInterface<"input/image"> {
+export interface Naff_input_image extends NaffBase<"input/image">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -1189,29 +659,9 @@ export interface NaffTag__input_image extends NaffInterface<"input/image"> {
     width(): number;
     type(input: string): this;
     type(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__input_month extends NaffInterface<"input/month"> {
+export interface Naff_input_month extends NaffBase<"input/month">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -1237,29 +687,9 @@ export interface NaffTag__input_month extends NaffInterface<"input/month"> {
     max(): string;
     step(input: string): this;
     step(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__input_number extends NaffInterface<"input/number"> {
+export interface Naff_input_number extends NaffBase<"input/number">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -1285,29 +715,9 @@ export interface NaffTag__input_number extends NaffInterface<"input/number"> {
     max(): string;
     step(input: string): this;
     step(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__input_password extends NaffInterface<"input/password"> {
+export interface Naff_input_password extends NaffBase<"input/password">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -1329,29 +739,9 @@ export interface NaffTag__input_password extends NaffInterface<"input/password">
     selection<R>(): R extends SelectionSubscope ? this : R;
     pattern(input: string): this;
     pattern(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__input_radio extends NaffInterface<"input/radio"> {
+export interface Naff_input_radio extends NaffBase<"input/radio">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -1372,29 +762,9 @@ export interface NaffTag__input_radio extends NaffInterface<"input/radio"> {
     defaultChecked(): boolean;
     indeterminate(input: boolean): this;
     indeterminate(): boolean;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__input_range extends NaffInterface<"input/range"> {
+export interface Naff_input_range extends NaffBase<"input/range">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -1420,29 +790,9 @@ export interface NaffTag__input_range extends NaffInterface<"input/range"> {
     max(): string;
     step(input: string): this;
     step(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__input_reset extends NaffInterface<"input/reset"> {
+export interface Naff_input_reset extends NaffBase<"input/reset">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -1457,29 +807,9 @@ export interface NaffTag__input_reset extends NaffInterface<"input/reset"> {
     disabled(): boolean;
     autocomplete(input: string): this;
     autocomplete(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__input_search extends NaffInterface<"input/search"> {
+export interface Naff_input_search extends NaffBase<"input/search">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -1501,29 +831,9 @@ export interface NaffTag__input_search extends NaffInterface<"input/search"> {
     selection<R>(): R extends SelectionSubscope ? this : R;
     pattern(input: string): this;
     pattern(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__input_submit extends NaffInterface<"input/submit"> {
+export interface Naff_input_submit extends NaffBase<"input/submit">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -1538,29 +848,9 @@ export interface NaffTag__input_submit extends NaffInterface<"input/submit"> {
     disabled(): boolean;
     autocomplete(input: string): this;
     autocomplete(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__input_tel extends NaffInterface<"input/tel"> {
+export interface Naff_input_tel extends NaffBase<"input/tel">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -1582,29 +872,9 @@ export interface NaffTag__input_tel extends NaffInterface<"input/tel"> {
     selection<R>(): R extends SelectionSubscope ? this : R;
     pattern(input: string): this;
     pattern(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__input_text extends NaffInterface<"input/text"> {
+export interface Naff_input_text extends NaffBase<"input/text">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -1626,29 +896,9 @@ export interface NaffTag__input_text extends NaffInterface<"input/text"> {
     selection<R>(): R extends SelectionSubscope ? this : R;
     pattern(input: string): this;
     pattern(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__input_time extends NaffInterface<"input/time"> {
+export interface Naff_input_time extends NaffBase<"input/time">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -1674,29 +924,9 @@ export interface NaffTag__input_time extends NaffInterface<"input/time"> {
     max(): string;
     step(input: string): this;
     step(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__input_url extends NaffInterface<"input/url"> {
+export interface Naff_input_url extends NaffBase<"input/url">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -1718,29 +948,9 @@ export interface NaffTag__input_url extends NaffInterface<"input/url"> {
     selection<R>(): R extends SelectionSubscope ? this : R;
     pattern(input: string): this;
     pattern(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__input_week extends NaffInterface<"input/week"> {
+export interface Naff_input_week extends NaffBase<"input/week">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -1766,110 +976,25 @@ export interface NaffTag__input_week extends NaffInterface<"input/week"> {
     max(): string;
     step(input: string): this;
     step(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__li extends NaffInterface<"li"> {
+export interface Naff_li extends NaffBase<"li">, Naff__Common {
     value(input: number): this;
     value(): number;
     type(input: string): this;
     type(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__label extends NaffInterface<"label"> {
+export interface Naff_label extends NaffBase<"label">, Naff__Common {
     htmlFor(input: string): this;
     htmlFor(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__legend extends NaffInterface<"legend"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
+export interface Naff_legend extends NaffBase<"legend">, Naff__Common {
+    
 }
 
-export interface NaffTag__link extends NaffInterface<"link"> {
+export interface Naff_link extends NaffBase<"link">, Naff__Common {
     rel<R>(): R extends TokenSubscope ? this : R;
     href(input: string): this;
     href(): string;
@@ -1896,58 +1021,14 @@ export interface NaffTag__link extends NaffInterface<"link"> {
     sizes<R>(): R extends TokenSubscope ? this : R;
     hreflang(input: string): this;
     hreflang(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__map extends NaffInterface<"map"> {
+export interface Naff_map extends NaffBase<"map">, Naff__Common {
     name(input: string): this;
     name(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__meta extends NaffInterface<"meta"> {
+export interface Naff_meta extends NaffBase<"meta">, Naff__Common {
     content(input: string): this;
     content(): string;
     name(input: string): this;
@@ -1956,31 +1037,9 @@ export interface NaffTag__meta extends NaffInterface<"meta"> {
     media(): string;
     httpEquiv(input: string): this;
     httpEquiv(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__meter extends NaffInterface<"meter"> {
+export interface Naff_meter extends NaffBase<"meter">, Naff__Common {
     value(input: number): this;
     value(): number;
     max(input: number): this;
@@ -1993,120 +1052,32 @@ export interface NaffTag__meter extends NaffInterface<"meter"> {
     high(): number;
     optimum(input: number): this;
     optimum(): number;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__del extends NaffInterface<"del"> {
+export interface Naff_del extends NaffBase<"del">, Naff__Common {
     cite(input: string): this;
     cite(): string;
     dateTime(input: string): this;
     dateTime(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__ins extends NaffInterface<"ins"> {
+export interface Naff_ins extends NaffBase<"ins">, Naff__Common {
     cite(input: string): this;
     cite(): string;
     dateTime(input: string): this;
     dateTime(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__ol extends NaffInterface<"ol"> {
+export interface Naff_ol extends NaffBase<"ol">, Naff__Common {
     type(input: string): this;
     type(): string;
     start(input: number): this;
     start(): number;
     reversed(input: boolean): this;
     reversed(): boolean;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__object extends NaffInterface<"object"> {
+export interface Naff_object extends NaffBase<"object">, Naff__Common {
     type(input: string): this;
     type(): string;
     height(input: string): this;
@@ -2123,60 +1094,16 @@ export interface NaffTag__object extends NaffInterface<"object"> {
     standby(): string;
     useMap(input: string): this;
     useMap(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__optgroup extends NaffInterface<"optgroup"> {
+export interface Naff_optgroup extends NaffBase<"optgroup">, Naff__Common {
     disabled(input: boolean): this;
     disabled(): boolean;
     label(input: string): this;
     label(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__option extends NaffInterface<"option"> {
+export interface Naff_option extends NaffBase<"option">, Naff__Common {
     value(input: string): this;
     value(): string;
     disabled(input: boolean): this;
@@ -2185,34 +1112,12 @@ export interface NaffTag__option extends NaffInterface<"option"> {
     selected(): boolean;
     defaultSelected(input: boolean): this;
     defaultSelected(): boolean;
-    readonly form: Naff<"option">;
+    readonly form: Naff<"form">;
     readonly index: number;
     readonly label: string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__output extends NaffInterface<"output"> {
+export interface Naff_output extends NaffBase<"output">, Naff__Common {
     value(input: string): this;
     value(): string;
     defaultValue(input: string): this;
@@ -2221,31 +1126,9 @@ export interface NaffTag__output extends NaffInterface<"output"> {
     name(input: string): this;
     name(): string;
     readonly labels: Naffs;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__progress extends NaffInterface<"progress"> {
+export interface Naff_progress extends NaffBase<"progress">, Naff__Common {
     max(input: number): this;
     max(): number;
     position(input: number): this;
@@ -2253,85 +1136,19 @@ export interface NaffTag__progress extends NaffInterface<"progress"> {
     value(input: number): this;
     value(): number;
     readonly labels: Naffs;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__q extends NaffInterface<"q"> {
+export interface Naff_q extends NaffBase<"q">, Naff__Common {
     cite(input: string): this;
     cite(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__blockquote extends NaffInterface<"blockquote"> {
+export interface Naff_blockquote extends NaffBase<"blockquote">, Naff__Common {
     cite(input: string): this;
     cite(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__script extends NaffInterface<"script"> {
+export interface Naff_script extends NaffBase<"script">, Naff__Common {
     src(input: string): this;
     src(): string;
     type(input: string): this;
@@ -2350,31 +1167,9 @@ export interface NaffTag__script extends NaffInterface<"script"> {
     noModule(): boolean;
     fetchPriority(input: DomPriority): this;
     fetchPriority(): DomPriority;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__select extends NaffInterface<"select"> {
+export interface Naff_select extends NaffBase<"select">, Naff__Common {
     autocomplete(input: string): this;
     autocomplete(): string;
     disabled(input: boolean): this;
@@ -2390,34 +1185,12 @@ export interface NaffTag__select extends NaffInterface<"select"> {
     value(input: string): this;
     value(): string;
     readonly labels: Naffs;
-    readonly form: Naff<"select"> | null;
+    readonly form: Naff<"form"> | null;
     multiple(input: boolean): this;
     multiple(): boolean;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__source extends NaffInterface<"source"> {
+export interface Naff_source extends NaffBase<"source">, Naff__Common {
     media(input: string): this;
     media(): string;
     sizes(input: string): this;
@@ -2432,62 +1205,18 @@ export interface NaffTag__source extends NaffInterface<"source"> {
     type(): string;
     width(input: number): this;
     width(): number;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__style extends NaffInterface<"style"> {
+export interface Naff_style extends NaffBase<"style">, Naff__Common {
     media(input: string): this;
     media(): string;
     type(input: string): this;
     type(): string;
     disabled(input: boolean): this;
     disabled(): boolean;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__td extends NaffInterface<"td"> {
+export interface Naff_td extends NaffBase<"td">, Naff__Common {
     abbr(input: string): this;
     abbr(): string;
     colSpan(input: number): this;
@@ -2499,86 +1228,21 @@ export interface NaffTag__td extends NaffInterface<"td"> {
     headers(input: string): this;
     headers(): string;
     readonly cellIndex: number;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__table extends NaffInterface<"table"> {
-    readonly caption: Naff<"table"> | null;
-    readonly tHead: Naff<"table"> | null;
-    readonly tFoot: Naff<"table"> | null;
+export interface Naff_table extends NaffBase<"table">, Naff__Common {
+    readonly caption: Naff<"caption"> | null;
+    readonly tHead: Naff<"thead"> | null;
+    readonly tFoot: Naff<"tfoot"> | null;
     readonly rows: Naffs;
     readonly tBodies: Naffs;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__template extends NaffInterface<"template"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
+export interface Naff_template extends NaffBase<"template">, Naff__Common {
+    
 }
 
-export interface NaffTag__textarea extends NaffInterface<"textarea"> {
+export interface Naff_textarea extends NaffBase<"textarea">, Naff__Common {
     defaultValue(input: string): this;
     defaultValue(): string;
     value(input: string): this;
@@ -2598,81 +1262,18 @@ export interface NaffTag__textarea extends NaffInterface<"textarea"> {
     placeholder(input: string): this;
     placeholder(): string;
     selection<R>(): R extends SelectionSubscope ? this : R;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
 }
 
-export interface NaffTag__time extends NaffInterface<"time"> {
+export interface Naff_time extends NaffBase<"time">, Naff__Common {
     dateTime(input: string): this;
     dateTime(): string;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
 }
 
-export interface NaffTag__title extends NaffInterface<"title"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
+export interface Naff_title extends NaffBase<"title">, Naff__Common {
+    
 }
 
-export interface NaffTag__track extends NaffInterface<"track"> {
+export interface Naff_track extends NaffBase<"track">, Naff__Common {
     kind(input: DomTrackKind): this;
     kind(): DomTrackKind;
     src(input: string): this;
@@ -2685,1826 +1286,292 @@ export interface NaffTag__track extends NaffInterface<"track"> {
     default(): boolean;
     readonly readyState: DomTrackReadyState;
     readonly track: TextTrack;
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__ul extends NaffInterface<"ul"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__wbr extends NaffInterface<"wbr"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__var extends NaffInterface<"var"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__u extends NaffInterface<"u"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__tr extends NaffInterface<"tr"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__th extends NaffInterface<"th"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__tfoot extends NaffInterface<"tfoot"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__sup extends NaffInterface<"sup"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__summary extends NaffInterface<"summary"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__sub extends NaffInterface<"sub"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__strong extends NaffInterface<"strong"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__span extends NaffInterface<"span"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__small extends NaffInterface<"small"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__slot extends NaffInterface<"slot"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__section extends NaffInterface<"section"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__samp extends NaffInterface<"samp"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__ruby extends NaffInterface<"ruby"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__rt extends NaffInterface<"rt"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__rp extends NaffInterface<"rp"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__pre extends NaffInterface<"pre"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__picture extends NaffInterface<"picture"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__param extends NaffInterface<"param"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__p extends NaffInterface<"p"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__noscript extends NaffInterface<"noscript"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__nav extends NaffInterface<"nav"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__menu extends NaffInterface<"menu"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__marquee extends NaffInterface<"marquee"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__mark extends NaffInterface<"mark"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__main extends NaffInterface<"main"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__kbd extends NaffInterface<"kbd"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__i extends NaffInterface<"i"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__hgroup extends NaffInterface<"hgroup"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__header extends NaffInterface<"header"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__head extends NaffInterface<"head"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__h6 extends NaffInterface<"h6"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__h5 extends NaffInterface<"h5"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__h4 extends NaffInterface<"h4"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__h3 extends NaffInterface<"h3"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__h2 extends NaffInterface<"h2"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__h1 extends NaffInterface<"h1"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__frame extends NaffInterface<"frame"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__footer extends NaffInterface<"footer"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__font extends NaffInterface<"font"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__figure extends NaffInterface<"figure"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__figcaption extends NaffInterface<"figcaption"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__em extends NaffInterface<"em"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__dt extends NaffInterface<"dt"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__dl extends NaffInterface<"dl"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__div extends NaffInterface<"div"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__dir extends NaffInterface<"dir"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__dfn extends NaffInterface<"dfn"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__details extends NaffInterface<"details"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__dd extends NaffInterface<"dd"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__datalist extends NaffInterface<"datalist"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__tbody extends NaffInterface<"tbody"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__colgroup extends NaffInterface<"colgroup"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__col extends NaffInterface<"col"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__code extends NaffInterface<"code"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__cite extends NaffInterface<"cite"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__br extends NaffInterface<"br"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__body extends NaffInterface<"body"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__bdo extends NaffInterface<"bdo"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__bdi extends NaffInterface<"bdi"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__b extends NaffInterface<"b"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__aside extends NaffInterface<"aside"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__article extends NaffInterface<"article"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__address extends NaffInterface<"address"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__abbr extends NaffInterface<"abbr"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__s extends NaffInterface<"s"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__caption extends NaffInterface<"caption"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag__thead extends NaffInterface<"thead"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
-}
-
-export interface NaffTag___ extends NaffInterface<"?"> {
-    dir(input: DomDir): this;
-    dir(): DomDir;
-    accessKey(input: string): this;
-    accessKey(): string;
-    contentEditable(input: DomContentEditable): this;
-    contentEditable(): DomContentEditable;
-    hidden(input: boolean): this;
-    hidden(): boolean;
-    lang(input: string): this;
-    lang(): string;
-    nonce(input: string): this;
-    nonce(): string;
-    tabIndex(input: number): this;
-    tabIndex(): number;
-    title(input: string): this;
-    title(): string;
-    id(input: string): this;
-    id(): string;
-    autocapitalize(input: DomAutoCapitalize): this;
-    autocapitalize(): DomAutoCapitalize;
-    autofocus(input: boolean): this;
-    autofocus(): boolean;
+}
+
+export interface Naff_ul extends NaffBase<"ul">, Naff__Common {
+    
+}
+
+export interface Naff_wbr extends NaffBase<"wbr">, Naff__Common {
+    
+}
+
+export interface Naff_var extends NaffBase<"var">, Naff__Common {
+    
+}
+
+export interface Naff_u extends NaffBase<"u">, Naff__Common {
+    
+}
+
+export interface Naff_tr extends NaffBase<"tr">, Naff__Common {
+    
+}
+
+export interface Naff_th extends NaffBase<"th">, Naff__Common {
+    
+}
+
+export interface Naff_tfoot extends NaffBase<"tfoot">, Naff__Common {
+    
+}
+
+export interface Naff_sup extends NaffBase<"sup">, Naff__Common {
+    
+}
+
+export interface Naff_summary extends NaffBase<"summary">, Naff__Common {
+    
+}
+
+export interface Naff_sub extends NaffBase<"sub">, Naff__Common {
+    
+}
+
+export interface Naff_strong extends NaffBase<"strong">, Naff__Common {
+    
+}
+
+export interface Naff_span extends NaffBase<"span">, Naff__Common {
+    
+}
+
+export interface Naff_small extends NaffBase<"small">, Naff__Common {
+    
+}
+
+export interface Naff_slot extends NaffBase<"slot">, Naff__Common {
+    
+}
+
+export interface Naff_section extends NaffBase<"section">, Naff__Common {
+    
+}
+
+export interface Naff_samp extends NaffBase<"samp">, Naff__Common {
+    
+}
+
+export interface Naff_ruby extends NaffBase<"ruby">, Naff__Common {
+    
+}
+
+export interface Naff_rt extends NaffBase<"rt">, Naff__Common {
+    
+}
+
+export interface Naff_rp extends NaffBase<"rp">, Naff__Common {
+    
+}
+
+export interface Naff_pre extends NaffBase<"pre">, Naff__Common {
+    
+}
+
+export interface Naff_picture extends NaffBase<"picture">, Naff__Common {
+    
+}
+
+export interface Naff_param extends NaffBase<"param">, Naff__Common {
+    
+}
+
+export interface Naff_p extends NaffBase<"p">, Naff__Common {
+    
+}
+
+export interface Naff_noscript extends NaffBase<"noscript">, Naff__Common {
+    
+}
+
+export interface Naff_nav extends NaffBase<"nav">, Naff__Common {
+    
+}
+
+export interface Naff_menu extends NaffBase<"menu">, Naff__Common {
+    
+}
+
+export interface Naff_marquee extends NaffBase<"marquee">, Naff__Common {
+    
+}
+
+export interface Naff_mark extends NaffBase<"mark">, Naff__Common {
+    
+}
+
+export interface Naff_main extends NaffBase<"main">, Naff__Common {
+    
+}
+
+export interface Naff_kbd extends NaffBase<"kbd">, Naff__Common {
+    
+}
+
+export interface Naff_i extends NaffBase<"i">, Naff__Common {
+    
+}
+
+export interface Naff_hgroup extends NaffBase<"hgroup">, Naff__Common {
+    
+}
+
+export interface Naff_header extends NaffBase<"header">, Naff__Common {
+    
+}
+
+export interface Naff_head extends NaffBase<"head">, Naff__Common {
+    
+}
+
+export interface Naff_h6 extends NaffBase<"h6">, Naff__Common {
+    
+}
+
+export interface Naff_h5 extends NaffBase<"h5">, Naff__Common {
+    
+}
+
+export interface Naff_h4 extends NaffBase<"h4">, Naff__Common {
+    
+}
+
+export interface Naff_h3 extends NaffBase<"h3">, Naff__Common {
+    
+}
+
+export interface Naff_h2 extends NaffBase<"h2">, Naff__Common {
+    
+}
+
+export interface Naff_h1 extends NaffBase<"h1">, Naff__Common {
+    
+}
+
+export interface Naff_frame extends NaffBase<"frame">, Naff__Common {
+    
+}
+
+export interface Naff_footer extends NaffBase<"footer">, Naff__Common {
+    
+}
+
+export interface Naff_font extends NaffBase<"font">, Naff__Common {
+    
+}
+
+export interface Naff_figure extends NaffBase<"figure">, Naff__Common {
+    
+}
+
+export interface Naff_figcaption extends NaffBase<"figcaption">, Naff__Common {
+    
+}
+
+export interface Naff_em extends NaffBase<"em">, Naff__Common {
+    
+}
+
+export interface Naff_dt extends NaffBase<"dt">, Naff__Common {
+    
+}
+
+export interface Naff_dl extends NaffBase<"dl">, Naff__Common {
+    
+}
+
+export interface Naff_div extends NaffBase<"div">, Naff__Common {
+    
+}
+
+export interface Naff_dir extends NaffBase<"dir">, Naff__Common {
+    
+}
+
+export interface Naff_dfn extends NaffBase<"dfn">, Naff__Common {
+    
+}
+
+export interface Naff_details extends NaffBase<"details">, Naff__Common {
+    
+}
+
+export interface Naff_dd extends NaffBase<"dd">, Naff__Common {
+    
+}
+
+export interface Naff_datalist extends NaffBase<"datalist">, Naff__Common {
+    
+}
+
+export interface Naff_tbody extends NaffBase<"tbody">, Naff__Common {
+    
+}
+
+export interface Naff_colgroup extends NaffBase<"colgroup">, Naff__Common {
+    
+}
+
+export interface Naff_col extends NaffBase<"col">, Naff__Common {
+    
+}
+
+export interface Naff_code extends NaffBase<"code">, Naff__Common {
+    
+}
+
+export interface Naff_cite extends NaffBase<"cite">, Naff__Common {
+    
+}
+
+export interface Naff_br extends NaffBase<"br">, Naff__Common {
+    
+}
+
+export interface Naff_body extends NaffBase<"body">, Naff__Common {
+    
+}
+
+export interface Naff_bdo extends NaffBase<"bdo">, Naff__Common {
+    
+}
+
+export interface Naff_bdi extends NaffBase<"bdi">, Naff__Common {
+    
+}
+
+export interface Naff_b extends NaffBase<"b">, Naff__Common {
+    
+}
+
+export interface Naff_aside extends NaffBase<"aside">, Naff__Common {
+    
+}
+
+export interface Naff_article extends NaffBase<"article">, Naff__Common {
+    
+}
+
+export interface Naff_address extends NaffBase<"address">, Naff__Common {
+    
+}
+
+export interface Naff_abbr extends NaffBase<"abbr">, Naff__Common {
+    
+}
+
+export interface Naff_s extends NaffBase<"s">, Naff__Common {
+    
+}
+
+export interface Naff_caption extends NaffBase<"caption">, Naff__Common {
+    
+}
+
+export interface Naff_thead extends NaffBase<"thead">, Naff__Common {
+    
+}
+
+export interface Naff__ extends NaffBase<"?">, Naff__Common {
+    
 }

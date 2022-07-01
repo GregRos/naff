@@ -10,20 +10,19 @@ function getNaffs() {
     return `Naffs`;
 }
 
-function getNaffType(tag: string) {
-    return `Naff<"${tag}">`;
+function getNaffType(tag: string | undefined) {
+    return `Naff<"${tag ?? "NaffTagNames"}">`;
 }
 
 export function* getDeclarationsFor(
-    prop: FullPropSchema,
-    tag: string
+    prop: FullPropSchema
 ): Generator<InterfaceMemberStructures> {
     switch (prop.kind) {
         case "one":
             yield {
                 kind: StructureKind.PropertySignature,
                 name: prop.name,
-                type: getNaffType(tag),
+                type: getNaffType(prop.tag),
                 isReadonly: true
             };
             break;
@@ -31,7 +30,7 @@ export function* getDeclarationsFor(
             yield {
                 kind: StructureKind.PropertySignature,
                 name: prop.name,
-                type: `${getNaffType(tag)} | null`,
+                type: `${getNaffType(prop.tag)} | null`,
                 isReadonly: true
             };
             break;

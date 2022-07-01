@@ -3,15 +3,15 @@ import { Naffs } from "./naffs";
 import { NaffAny } from "./index";
 import { NaffTagMap } from "./props.bin";
 
-export type EventMap = HTMLElementEventMap;
-export type EventNames = keyof EventMap;
-export type NaffHandler<T extends NaffTagNames, E extends EventNames> = (
-    ev: EventMap[E],
-    target: Naff<T>
-) => unknown | Promise<unknown>;
+export type TagEventMap = HTMLElementEventMap;
+export type TagEventNames = keyof TagEventMap;
+export type NaffTagEventHandler<
+    T extends NaffTagNames,
+    E extends TagEventNames
+> = (ev: TagEventMap[E], target: Naff<T>) => void | Promise<void>;
 
-export type NaffSubscriberMap<Tag extends NaffTagNames> = {
-    [name in EventNames]?: NaffHandler<Tag, name>;
+export type NaffTagSubscriberMap<Tag extends NaffTagNames> = {
+    [name in TagEventNames]?: NaffTagEventHandler<Tag, name>;
 };
 export type SingleDomInput = Element | Naff;
 export type MultiDomInput = SingleDomInput | Naffs | Element[];

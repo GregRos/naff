@@ -7,11 +7,9 @@ export interface TokenSubscope {
 
     str(value: string): this;
 
-    str(value: string): this;
+    str(): string;
 
     has(name: string): boolean;
 
     get(): string[];
-
-    str(): string;
 }

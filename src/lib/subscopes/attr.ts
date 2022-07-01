@@ -2,11 +2,9 @@ import { NaffTagMap } from "../props.bin";
 import { NaffTagNames } from "../common";
 
 export type AttrSubscope<Tag extends NaffTagNames> = {
-    [attr in Extract<keyof NaffTagMap[Tag], string> as
-        | Lowercase<attr>
-        | string]: {
+    [attr in keyof NaffTagMap[Tag] & string as Lowercase<attr>]: {
         (): string;
-        (value: string): AttrSubscope<Tag>;
+        (value: string | null): AttrSubscope<Tag>;
     };
 } & {
     has(name: string): boolean;

@@ -3,33 +3,41 @@ import {
     ImportDeclarationStructure,
     Project,
     SourceFile,
-    StructureKind
+    StructureKind,
+    Type,
+    ObjectLiteralElement,
+    TypeElementMemberStructures
 } from "ts-morph";
-import { schMapNaff } from "./schema/schema";
+import { schAllTags, schMapNaff } from "./schema/schema";
 import { getDeclarationsFor } from "./resolve-member";
 import { NaffTagSchema, TypedProp } from "./schema/schema-types";
-import { decomposeFullSchema } from "./generators/decompose-schema";
+import {
+    decomposeFullSchema,
+    decomposeTagSchema
+} from "./generators/decompose-schema";
 
 Error.stackTraceLimit = Infinity;
 
 function sanitizeName(name: string) {
-    return name.replace(/[-?\/]/g, "_");
+    return name.replace(/[-?/]/g, "_");
 }
 
 function* getImportDeclarations(schema: NaffTagSchema) {
     const imports = new Map<string, Set<string>>();
-    for (const { props } of decomposeFullSchema(schMapNaff)) {
-        for (const { type } of props) {
-            if (!type?.source) {
-                continue;
-            }
-            let existing = imports.get(type.source);
-            if (!existing) {
-                existing = new Set();
-                imports.set(type.source, existing);
-            }
-            existing.add(type.name);
+    const onlyProps = [
+        ...[...decomposeFullSchema(schMapNaff)].flatMap(x => x.props),
+        ...decomposeTagSchema(schAllTags)
+    ];
+    for (const { type } of onlyProps) {
+        if (!type?.source) {
+            continue;
         }
+        let existing = imports.get(type.source);
+        if (!existing) {
+            existing = new Set();
+            imports.set(type.source, existing);
+        }
+        existing.add(type.name);
     }
 
     for (const [key, types] of imports) {
@@ -48,17 +56,31 @@ function addTagTypes(src: SourceFile, schema: NaffTagSchema) {
         name: "NaffTagMap",
         isExported: true
     });
+    src.addInterface({
+        name: "Naff__Common"
+    }).addMembers(
+        [...decomposeTagSchema(schAllTags)].flatMap(x => [
+            ...getDeclarationsFor(x)
+        ])
+    );
+    const allDecls = [] as TypeElementMemberStructures[];
     for (const tag of decomposeFullSchema(schema)) {
+        if (tag.tag === "*") {
+            continue;
+        }
         console.log(`GENERATING for tag "${tag.tag}"`);
+
         const tagInterface = src.addInterface({
             kind: StructureKind.Interface,
-            name: sanitizeName(`NaffTag__${tag.tag}`),
+            name: sanitizeName(`Naff_${tag.tag}`),
             isExported: true,
-            extends: [`NaffInterface<"${tag.tag}">`]
+            extends: [`NaffBase<"${tag.tag}">`, `Naff__Common`]
         });
+
         const decls = tag.props.flatMap(prop => {
-            return [...getDeclarationsFor(prop, tag.tag)];
+            return [...getDeclarationsFor(prop)];
         });
+        allDecls.push(...decls);
         tagInterface.addMembers(decls);
         interfaceTagMap.addProperty({
             name: `"${tag.tag}"`,
@@ -89,7 +111,7 @@ async function run() {
                     name: "Naff"
                 },
                 {
-                    name: "NaffInterface"
+                    name: "NaffBase"
                 }
             ]
         },

@@ -6,12 +6,12 @@ import {
 } from "./subscopes";
 import {
     DomInput,
-    EventMap,
-    EventNames,
+    TagEventMap,
+    TagEventNames,
     MultiDomInput,
-    NaffHandler,
+    NaffTagEventHandler,
     NaffPredicate,
-    NaffSubscriberMap,
+    NaffTagSubscriberMap,
     NaffTagNames,
     SingleDomInput
 } from "./common";
@@ -19,8 +19,10 @@ import { NaffDisposableToken } from "./token";
 import { NaffAny } from "./index";
 import { Naffs } from "./naffs";
 import { NaffTagMap } from "./props.bin";
+import { NaffDocument } from "./naff-document";
 
-export interface NaffInterface<TagN extends NaffTagNames = NaffTagNames> {
+export interface NaffBase<TagN extends NaffTagNames = NaffTagNames> {
+    readonly $naff: TagN;
     readonly $tag: string;
     $style<R>(
         subscope: (s: StyleSubscope) => R
@@ -54,6 +56,9 @@ export interface NaffInterface<TagN extends NaffTagNames = NaffTagNames> {
     $html(): string;
     $html(input: string): this;
 
+    // Gets the document to which `this` belongs, or `null`.
+    readonly $owner: NaffDocument | null;
+
     readonly offsetLeft: number;
     readonly offsetTop: number;
     readonly offsetHeight: number;
@@ -64,35 +69,45 @@ export interface NaffInterface<TagN extends NaffTagNames = NaffTagNames> {
     readonly scrollTop: number;
 
     // Registers a handler using addEventListener.
-    $addListener<E extends EventNames>(
+    $addListener<E extends TagEventNames>(
         name: E,
-        handler: NaffHandler<TagN, E>
+        handler: NaffTagEventHandler<TagN, E>
     ): this;
 
     // Unregisters a handler using removeEventListener.
-    $dropListener(name: EventNames, handler: (...args: any[]) => any): this;
+    $dropListener(name: TagEventNames, handler: (...args: any[]) => any): this;
 
     // Returns a promise that resolves with the next invocation of `name`.
-    $once<Name extends EventNames>(name: Name): Promise<EventMap[Name]>;
+    $once<Name extends TagEventNames>(name: Name): Promise<TagEventMap[Name]>;
 
     // Registers multiple event handlers and returns a token that removes the subscription
     // When closed.
-    $on(map: NaffSubscriberMap<TagN>): NaffDisposableToken;
+    $on(map: NaffTagSubscriberMap<TagN>): NaffDisposableToken;
 
     // Registers one event handler and returns a token that removes the subscription
     // when closed.
-    $on<Name extends EventNames>(
+    $on<Name extends TagEventNames>(
         event: Name,
-        handler: NaffHandler<TagN, Name>
+        handler: NaffTagEventHandler<TagN, Name>
     ): NaffDisposableToken;
 
     $clone(): this;
 
     // Gets the first element matching `selector` that's a descendant of `this`.
-    $(selector: string): this | null;
+    $<Selector extends string>(
+        name: Selector
+    ): Selector extends NaffTagNames ? Naff<Selector> : Naff;
+
+    // Gets the first element matching the xpath `xpath`, rooted at `this`.
+    $x<TagName extends NaffTagNames = NaffTagNames>(
+        xpath: string
+    ): Naff<TagName>;
 
     // Gets all the elements matching 'selector' that are descendants of `this`.
     $$(selector: string): Naffs;
+
+    // Gets all the elements matching `xpath` that are descendants of `this`.
+    $$x(xpath: string): Naffs;
 
     // Gets the first ancestor of `this`.
     $parent(): this | null;
@@ -121,31 +136,39 @@ export interface NaffInterface<TagN extends NaffTagNames = NaffTagNames> {
     // Returns the current element, but in `any` mode.
     $toAny(): Naff<"?">;
 
+    // Returns a result set consisting of only `this`.
+    $toMany(): Naffs;
+
     // Generates `count` detached clones of `this`.
     $replicate(count: number): Naffs;
 
     // Returns a result set including `this` and all the elements in `others`.
     $plus(...others: MultiDomInput[]): Naffs;
 
-    $equal(other: SingleDomInput | NaffAny): boolean;
+    // Determines if `this` element is identical to `other`.
+    $isEqual(other: SingleDomInput | NaffAny): boolean;
 
-    $append(...inputs: DomInput[]): Naff<TagN>;
+    // Determines if `this` is an ancestor of `other`.
+    $isParentOf(other: SingleDomInput): boolean;
 
-    $prepend(...inputs: DomInput[]): Naff<TagN>;
+    // Determines if `this` is a child of `other`.
+    $isChildOf(other: SingleDomInput): boolean;
 
-    $after(...postfixes: DomInput[]): Naff<TagN>;
+    $append(...inputs: DomInput[]): this;
 
-    $before(...prefixes: DomInput[]): Naff<TagN>;
+    $prepend(...inputs: DomInput[]): this;
+
+    $after(...postfixes: DomInput[]): this;
+
+    $before(...prefixes: DomInput[]): this;
 
     $instead(...replacements: DomInput[]): Naffs;
 
-    $instead(replacer: (x: Naff<TagN>) => DomInput): Naffs;
+    $instead(replacer: (x: this) => DomInput): Naffs;
 
-    $switch(...replacements: DomInput[]): Naff<TagN>;
+    $switch(...replacements: DomInput[]): this;
 
-    $switch(replacer: (x: Naff<TagN>) => DomInput): Naffs;
+    $switch(replacer: (x: this) => DomInput): Naffs;
 }
 
 export type Naff<TagN extends NaffTagNames = NaffTagNames> = NaffTagMap[TagN];
-
-const a: Naff<"img">;

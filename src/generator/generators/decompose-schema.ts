@@ -16,7 +16,9 @@ export interface TagSchemaObject {
     props: FullPropSchema[];
 }
 
-export function* decomposeTagSchema(tagSchema: TagSchema<any>) {
+export function* decomposeTagSchema(
+    tagSchema: Record<string, SchemaPropValue | undefined>
+) {
     for (const [key, schema] of Object.entries(tagSchema)) {
         yield {
             name: key,
